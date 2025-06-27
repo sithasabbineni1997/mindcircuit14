@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage('CLONE') {
+            steps {
+                echo 'CODE CLONE FROM GITHUB'
+                 git branch: 'main', url: 'https://github.com/sithasabbineni1997/mindcircuit14.git'
+            }
+        }
+        stage('BUILD') {
+            steps {
+                echo 'USING MVN'
+                 sh 'mvn clean install'
+            }
+        }
+        stage('DEPLOY') {
+            steps {
+                echo 'TO TOMCAT'
+                 deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat', path: '', url: 'http://ec2-34-201-39-244.compute-1.amazonaws.com:8091')], contextPath: 'insta', war: '**/*.war'
+            }
+        }        
+
+    }
+}   
