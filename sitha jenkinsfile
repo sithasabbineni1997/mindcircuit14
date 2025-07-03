@@ -16,8 +16,8 @@ pipeline {
         stage('DEPLOY') {
             steps {
                 echo 'TO TOMCAT'
-                 deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcat', path: '', url: 'http://ec2-34-201-39-244.compute-1.amazonaws.com:8091')], contextPath: 'insta', war: '**/*.war'
-            }
+                 
+            }deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'mc-app', path: '', url: 'http://54.205.141.158:8081/')], contextPath: 'mc-app', war: '**/*.war'
         }        
 
     }
