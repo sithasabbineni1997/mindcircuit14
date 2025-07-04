@@ -20,8 +20,7 @@ pipeline {
         stage('DEPLOY') {
             steps {
                 echo 'TO TOMCAT'
-               deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'mc-fb', path: '', url: 'http://54.90.124.27:8081/')], contextPath: 'mc-fbapp', war: '**/*.war'
-                 
+               deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'mcapp', path: '', url: 'http://35.173.221.102:8081/')], contextPath: 'mc-fbapp', war: '**/*.war'
             }
         }        
 
