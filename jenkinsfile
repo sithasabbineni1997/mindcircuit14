@@ -1,31 +1,41 @@
 
+
+                
+
 pipeline {
     agent any
 
-   stages {
+    stages {
+
         stage('clone') {
             steps {
-                echo 'git'
+                echo 'Cloning repository...'
                 git branch: 'main', url: 'https://github.com/sithasabbineni1997/mindcircuit14.git'
             }
         }
-   
-   stages {
+
         stage('build') {
             steps {
-                echo 'from mvn'
+                echo 'Building with Maven...'
                 sh 'mvn clean install'
-                
             }
         }
 
-   stages {
         stage('deploy') {
             steps {
-                echo 'from tomcat'
-                deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'sitha', path: '', url: 'http://34.224.91.168:8081/manager/html')], contextPath: 'sitha-p', war: '**/*.war'
+                echo 'Deploying to Tomcat...'
+                deploy adapters: [
+                    tomcat9(
+                        alternativeDeploymentContext: '',
+                        credentialsId: 'sitha',
+                        path: '',
+                        url: 'http://34.224.91.168:8081/manager/html'
+                    )
+                ],
+                contextPath: 'sitha-p',
+                war: '**/*.war'
             }
         }
+
     }
-  
 }
